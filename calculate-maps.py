@@ -1,7 +1,7 @@
 #! python3
 # mapIt.py - Launches a map in the browser using an address from the
 # command line or clipboard.
-import webbrowser, sys, pyperclip, itertools
+import webbrowser, sys, pyperclip, itertools, re
 from selenium import webdriver
 if len(sys.argv) > 1:
     # Get address from command line.
@@ -27,12 +27,27 @@ end = chopped_list[-1]
 mobile_list = chopped_list[1:-1]
 print("Start: " + start, "End: " + end, "Mobile List: " + str(mobile_list))
 
-possible_perms_no_bookend = list(itertools.permutations(mobile_list))
-
+possible_perms_no_bookend = list(itertools.permutations(mobile_list, len(mobile_list)))
+print("Possible perms with no bookend")
 print(possible_perms_no_bookend)
 possible_perms = []
 for perm in possible_perms_no_bookend:
     possible_perms.append((start, *perm , end))
 print(possible_perms)
+
+#Now we have our possible permutations, let's get selenium to open them all and read the transit time for each
+browser = webdriver.Chrome()
+regex = re.compile(r'\d+(?:\.\d+)?')
+time_list = []
+for perm in possible_perms:
+    url_params = "/".join(perm)
+    print("URL params: " + url_params)
+    browser.get(url='https://www.google.com/maps/dir/' + url_params)
+    element = browser.find_element_by_class_name("xB1mrd-T3iPGc-iSfDt-duration")
+    text = element.text
+    print("Element text:" + text)
+    time = regex.findall(text)[0]
+    print("Stripped text: " + time)
+    time_list.append(int(time))
 
 #webbrowser.open(address)
