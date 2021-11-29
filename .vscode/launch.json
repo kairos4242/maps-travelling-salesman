@@ -1,0 +1,25 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Argless Test",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: Arg Test",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "https://www.google.com/maps/dir/Southgate+Centre,+5015+111+St+NW,+Edmonton,+AB+T6H+4M6/Leger+Transit+Centre+Bay+M,+Edmonton,+AB+T6R+0C3/624+Butchart+Wynd+NW,+Edmonton,+AB+T6R+1R5/South+Edmonton+Common,+Edmonton,+AB/@53.4661323,-113.6070811,12z/data=!4m25!4m24!1m5!1m1!1s0x53a01f46f1f1a2b9:0x8c51da51ac6836fc!2m2!1d-113.5136882!2d53.4856393!1m5!1m1!1s0x53a01fc88a91bf0b:0x12ec7c108d6cd334!2m2!1d-113.57954!2d53.455186!1m5!1m1!1s0x53a01f99b30d7203:0x1e6d6f3773f27104!2m2!1d-113.5691231!2d53.47309!1m5!1m1!1s0x53a01ec17a43c74d:0x55306f12b100a560!2m2!1d-113.484131!2d53.4463101"
+            ]
+        }
+    ]
+}
