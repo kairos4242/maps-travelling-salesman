@@ -50,4 +50,10 @@ for perm in possible_perms:
     print("Stripped text: " + time)
     time_list.append(int(time))
 
-#webbrowser.open(address)
+#Now that we have data from selenium, let's find the best path and return it to the user
+
+best_time_index = time_list.index(min(time_list))
+best_perm = possible_perms[best_time_index]
+best_address = 'https://www.google.com/maps/dir/' + "/".join(best_perm)
+
+webbrowser.open(best_address)
