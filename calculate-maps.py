@@ -1,5 +1,5 @@
 #! python3
-# mapIt.py - Launches a map in the browser using an address from the
+# Launches a map in the browser using an address from the
 # command line or clipboard.
 import webbrowser, sys, pyperclip, itertools, re
 from selenium import webdriver
@@ -43,11 +43,16 @@ for perm in possible_perms:
     url_params = "/".join(perm)
     print("URL params: " + url_params)
     browser.get(url='https://www.google.com/maps/dir/' + url_params)
-    element = browser.find_element_by_class_name("xB1mrd-T3iPGc-iSfDt-duration")
+    element = browser.find_element_by_class_name("xB1mrd-T3iPGc-iSfDt-n5AaSd")
     text = element.text
     print("Element text:" + text)
-    time = regex.findall(text)[0]
-    print("Stripped text: " + time)
+    if "hr" in text:
+        #we have an hour marker so let's ensure we're properly converting into minutes
+        numbers = [int(s) for s in text.split() if s.isdigit()]
+        time = numbers[0] * 60 + numbers[1]
+    else:
+        time = regex.findall(text)[0]
+    print("Stripped text: " + str(time))
     time_list.append(int(time))
 
 #Now that we have data from selenium, let's find the best path and return it to the user
